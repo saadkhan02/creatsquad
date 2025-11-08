@@ -80,8 +80,8 @@
 </head>
 <body class="bg-white dark:bg-gray-900">
     <!-- Navigation -->
-    <nav class="bg-white dark:bg-gray-800 shadow-lg fixed w-full top-0 z-50 border-b border-gray-200 dark:border-gray-700">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="bg-white dark:bg-gray-800 shadow-lg fixed w-full top-0 z-50 border-b border-gray-200 dark:border-gray-700" x-data="{ mobileMenuOpen: false }" x-on:keydown.escape.window="mobileMenuOpen = false">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" x-on:click.away="mobileMenuOpen = false">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
                     <a href="#" class="flex items-center space-x-2">
@@ -111,12 +111,21 @@
                         </svg>
                     </button>
                 </div>
-                <div class="flex items-center space-x-4">
-                <button class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition">
-                    Get Started
-                </button>
-                    <!-- Mobile Theme Toggle -->
-                    <button id="theme-toggle-mobile" class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition" aria-label="Toggle theme">
+                <div class="flex items-center space-x-2">
+                    <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition" aria-label="Toggle navigation menu" :aria-expanded="mobileMenuOpen.toString()" @click="mobileMenuOpen = !mobileMenuOpen">
+                        <template x-if="!mobileMenuOpen">
+                            <svg class="w-6 h-6 text-slate-900 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </template>
+                        <template x-if="mobileMenuOpen">
+                            <svg class="w-6 h-6 text-slate-900 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </template>
+                    </button>
+                     <!-- Mobile Theme Toggle -->
+                     <button id="theme-toggle-mobile" class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition" aria-label="Toggle theme">
                         <svg id="theme-icon-light-mobile" class="w-5 h-5 text-slate-900 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
                         </svg>
@@ -124,6 +133,15 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                         </svg>
                     </button>
+                </div>
+            </div>
+
+            <div class="md:hidden" x-show="mobileMenuOpen" x-transition x-cloak>
+                <div class="pt-2 pb-4 space-y-1">
+                    <a href="#pricing" class="block px-3 py-2 rounded-lg text-slate-900 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition" @click="mobileMenuOpen = false">Pricing</a>
+                    <a href="#process" class="block px-3 py-2 rounded-lg text-slate-900 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition" @click="mobileMenuOpen = false">Process</a>
+                    <a href="#faq" class="block px-3 py-2 rounded-lg text-slate-900 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition" @click="mobileMenuOpen = false">FAQ</a>
+                    <a href="#contact" class="block px-3 py-2 rounded-lg text-slate-900 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition" @click="mobileMenuOpen = false">Contact</a>
                 </div>
             </div>
         </div>
